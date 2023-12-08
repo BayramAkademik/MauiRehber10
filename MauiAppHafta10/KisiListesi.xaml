@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="MauiAppHafta10.KisiListesi"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:MauiAppHafta10"
+    mc:Ignorable="d" Disappearing="SaveList" >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ekle"    Order="Primary" IconImageSource="personadd.png" Clicked="KisiEkle"/>
+        <ToolbarItem Text="Paylaş"  Order="Primary" IconImageSource="share.png" Clicked="DosyaPaylas"/>
+        <ToolbarItem Text="Kaydet"  Order="Primary" IconImageSource="save.png" Clicked="DosyaKaydet"/>
+    </ContentPage.ToolbarItems>
+
+
+    <ScrollView>
+
+        <CollectionView x:Name="listKisiler" SelectionMode="Single" Margin="5">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <SwipeView >
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Düzenle" 
+                                           BackgroundColor="Green"
+                                           IconImageSource="edit.png"
+                                           Clicked="KisiDuzenle"
+                                           CommandParameter="{Binding ID}"/>
+                                <SwipeItem Text="Resim" 
+                                           BackgroundColor="Blue"
+                                           IconImageSource="camera.png"
+                                           Clicked="ResimEkle"
+                                           CommandParameter="{Binding ID}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Sil" 
+                                           BackgroundColor="Pink"
+                                           IconImageSource="trash.png"
+                                           Clicked="KisiSil"
+                                           CommandParameter="{Binding ID}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+
+                        <Border Background="Transparent" Margin="5">
+                            <Grid ColumnDefinitions="Auto,*,Auto"  RowDefinitions="2*,1*,1*,0.5*">
+
+                                <Border Grid.Column="0" Grid.RowSpan="4" Margin="0,0,4,0">
+                                    <Image Source="{Binding Resim}" WidthRequest="70"   />
+                                </Border>
+
+                                <Label Text="{Binding AdSoyad}" FontSize="20" Grid.Column="1" Grid.Row="0" />
+                                <Label Text="{Binding Telefon}" FontSize="12" Grid.Column="1" Grid.Row="1" />
+                                <Label Text="{Binding Mail}"    FontSize="12" Grid.Column="1" Grid.Row="2" />
+                                <Label Text="{Binding ID}"      FontSize="8"  Grid.Column="1" Grid.Row="3"/>
+
+
+                            </Grid>
+
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Düzenle" 
+                                                   IconImageSource="edit.png"
+                                                   Clicked="KisiDuzenle"
+                                                   CommandParameter="{Binding ID}"/>
+
+                                    <MenuFlyoutItem Text="Sil" 
+                                                   IconImageSource="trash.png"
+                                                   Clicked="KisiSil"
+                                                   CommandParameter="{Binding ID}"/>
+
+                                    <MenuFlyoutItem Text="Resim" 
+                                                   IconImageSource="person1.png"
+                                                   Clicked="ResimEkle"
+                                                   CommandParameter="{Binding ID}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+
+                        </Border>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </ScrollView>
+
+
+</ContentPage>
